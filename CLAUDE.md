@@ -68,19 +68,21 @@ supabase/migrations/     # SQL versionado
 
 ## Estado actual del proyecto
 
-### Completado
+### Completado (MVP funcional, sprints 0-6)
 - Scaffold Vite + React + TS + Tailwind v4 + shadcn/ui (preset Nova, acento vino/burdeos)
-- Cliente Supabase (`src/lib/supabase.ts`) + TanStack Query + React Router montados en `main.tsx`
-- Proyecto Supabase creado (`ixpvktzcojxyvqzoxkcv`, eu-west-1)
+- Esquema Supabase completo + RLS verificado (aislamiento por usuario probado con simulación de dos usuarios, antes y después de optimizar las políticas)
+- Auth completa: registro con confirmación de email, login, onboarding corto
+- Catálogo semilla de 29 vinos españoles investigados (Rioja/Ribera del Duero/Priorat) con confianza honesta (solo 5 de 29 en "alto")
+- Búsqueda de catálogo, añadir/editar/eliminar botellas, fallback manual sin valorar, aviso de añada distinta
+- Dashboard: valor total, desglose por región (gráfico validado con la skill de dataviz), distribución de confianza
+- Landing real con muestra del catálogo y disclaimer legal; barrido de copy sin lenguaje de recomendación personalizada
+- `get_advisors` limpio (security y performance, salvo INFO de índices nuevos sin uso todavía y el WARN de "leaked password protection" que requiere activarse desde el Dashboard de Supabase, no vía SQL/MCP)
 
-### En progreso / siguiente
-Ver `Plan_v1.0_MVP.md` (o el historial de la sesión de Claude Code) para el detalle de cada sprint:
-1. Esquema Supabase + Auth (email/contraseña, confirmación de email activada)
-2. Catálogo semilla de 25-30 vinos investigados
-3. Añadir botellas + colección
-4. Dashboard y valoración
-5. Onboarding + Landing
-6. QA, hardening y despliegue en Vercel
+### Pendiente
+- Despliegue a Vercel (requiere confirmación explícita del usuario en el chat antes de cada `deploy_to_vercel`)
+- Prueba de aislamiento RLS a través de dos cuentas reales en la UI (bloqueada en la sesión de build por el rate limit de emails de Supabase tras las pruebas repetidas; la lógica ya está verificada exhaustivamente a nivel de política SQL)
+- Activar manualmente en el Dashboard de Supabase: "Leaked password protection" (Authentication → Policies)
+- Bug conocido de Radix Presence en Dropdown/Select/Tooltip (ver tarea flotante ya registrada) — Dialog y Popover ya corregidos en sus puntos de uso
 
 ---
 
