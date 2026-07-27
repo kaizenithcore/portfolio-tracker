@@ -1,3 +1,5 @@
+import { useScrollReveal } from '@/hooks/useScrollReveal'
+
 const STEPS = [
   {
     title: 'Busca tu vino',
@@ -16,19 +18,24 @@ const STEPS = [
 ]
 
 export function HowItWorks() {
+  const ref = useScrollReveal<HTMLDivElement>({ itemSelector: '[data-reveal-item]' })
+
   return (
     <div className="bg-paper px-4 py-16 sm:py-24">
-      <div className="mx-auto max-w-[1180px]">
-        <p className="text-[13px] font-semibold tracking-[0.02em] text-stone uppercase">
+      <div ref={ref} className="mx-auto max-w-[1180px]">
+        <p data-reveal-item className="text-[13px] font-semibold tracking-[0.02em] text-stone uppercase">
           Cómo funciona
         </p>
-        <h2 className="mt-2 font-heading text-3xl font-normal text-charcoal sm:text-4xl">
+        <h2
+          data-reveal-item
+          className="mt-2 font-heading text-3xl font-light text-charcoal sm:text-4xl"
+        >
           De la botella al valor, en tres pasos
         </h2>
 
         <div className="mt-12 grid gap-10 sm:grid-cols-3">
           {STEPS.map((step, index) => (
-            <div key={step.title}>
+            <div key={step.title} data-reveal-item>
               <p className="font-heading text-2xl text-garnet">{`0${index + 1}`}</p>
               <h3 className="mt-2 text-[15px] font-semibold text-charcoal">{step.title}</h3>
               <p className="mt-1 text-[15px] leading-relaxed text-stone">{step.description}</p>

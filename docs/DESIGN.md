@@ -171,12 +171,13 @@ Geist 400, 14–15px, Stone/Stone Light, separated by a middle-dot (`·`), never
 
 ### Don't
 - Do not borrow Vinovest's *language* — no "invest," no "annualized return," no "personalized portfolio," no performance percentages on any bottle or collection. This is the line that keeps Acervo outside CNMV's EAFI perimeter; see `CLAUDE.md`.
-- Do not use drop shadows, glows, or gradients anywhere. Elevation is Ink→Ink Elevated or Paper→Paper Elevated surface contrast only, plus hairline borders — never `box-shadow`.
+- Do not use drop shadows or static decorative gradients on cards/buttons at rest. Elevation is Ink→Ink Elevated or Paper→Paper Elevated surface contrast only, plus hairline borders — never `box-shadow`. The one exception is motion-gated: see §7 Motion & Interaction — a gradient is only ever allowed as an *interaction* cue (hover spotlight, hero vignette), never as static card decoration.
 - Do not set Fraunces below 28px or above 15% of a viewport's height — it's a headline/hero instrument, not a body or label font.
-- Do not introduce a second chromatic accent alongside Garnet, even for a "just this once" promotional banner.
+- Do not introduce a second chromatic accent alongside Garnet, even for a "just this once" promotional banner — including in motion: the spotlight/vignette in §7 is Garnet-only.
 - Do not use pure `#000000` or pure `#ffffff` anywhere — the whole system is warmed (Ink, Ivory, Paper, Charcoal) on purpose; stark black/white will look like a different, colder product next to it.
 - Do not apply the ghost-button treatment inside working-app task flows, or the filled-button treatment on marketing/hero surfaces — the split in §4 is deliberate, not interchangeable.
-- Do not add wine-bottle or product photography yet — see §7 Imagery. The system is built to work on typography and color alone until real photography exists.
+- Do not add wine-bottle or product photography yet — see §8 Imagery. The system is built to work on typography and color alone until real photography exists.
+- Do not animate anything for a user with `prefers-reduced-motion: reduce` — see §7. Content must render in its final state instantly, not skip the reveal and stay invisible.
 
 ---
 
@@ -193,7 +194,35 @@ No shadows anywhere in the system. Elevation is communicated purely by moving on
 
 ---
 
-## 7. Imagery
+## 7. Motion & Interaction
+
+Neither Custo nor Aker (both effectively static print-gallery layouts) needed a motion language — Acervo does, because it's a product people need to trust with real value, not a brochure. Motion here does one job: prove the page is alive and considered, without ever becoming the point.
+
+**Library:** `animejs` (v4) for choreographed entrances; plain CSS transitions for hover/pointer feedback (cheaper, no JS on the hot path of a `mousemove`).
+
+### Scroll Reveal
+**Role:** Every marketing section's content enters once, the first time it's scrolled into view — never on every re-scroll, never as a loop.
+
+Children fade and rise together: `opacity 0→1`, `translateY 24px→0`, `duration 700ms`, `ease outQuart`, staggered `90ms` apart in DOM order. Triggered by `IntersectionObserver` at `threshold: 0.15`, disconnected after firing once. Above-the-fold content (the hero) uses the identical mechanism — it simply fires immediately since the section is already in view on mount, so there's only one reveal implementation in the codebase (`useScrollReveal`), not a separate "on-mount" variant.
+
+### Hero Vignette
+**Role:** The one static-looking gradient in the system — reads as *lighting*, not decoration
+
+A soft Garnet radial glow (`~16%` mix into transparent) anchored top-left of the Ink hero, fixed and non-interactive (`pointer-events: none`). This is the sole exception to "no gradients": it's doing the job a spotlight would do in a physical gallery — a single, motivated light source, never a rainbow or multi-stop decorative fill.
+
+### Spotlight Card (hover)
+**Role:** Catalog preview cards, and any future card grid that benefits from a tactile "this is alive" cue on hover
+
+A `220px` radial Garnet glow (`~12%` mix) tracks the pointer inside the card via `mousemove`-driven CSS custom properties (`--spotlight-x`/`--spotlight-y`), fading in/out with the card's hover state (`opacity` transition, `300ms`). Paired with a `-2px` translateY lift on the card itself. This is interaction feedback, not ambient decoration — it does not run, and is not visible, until a pointer is over the card. Reserve it for content the user is actively evaluating (catalog cards); never apply it to functional in-app UI (tables, forms) where it would read as noise rather than delight.
+
+### Reduced Motion
+**Role:** Non-negotiable accessibility floor
+
+Every entrance animation checks `prefers-reduced-motion: reduce` first and, if set, applies the animation's *end state* instantly (full opacity, resting position) rather than skipping the reveal and leaving content invisible. Hover-driven CSS transitions (spotlight, button color) are left running — they're state changes triggered by deliberate user action, not autoplaying motion, and are exempt from this check the way any `:hover` transition would be.
+
+---
+
+## 8. Imagery
 
 **Current state: none.** Acervo has no product photography (there's no physical product — bottles belong to users, not to us) and no stock imagery budget for this MVP. The system is deliberately built to carry full brand weight on typography and color alone, the way Vinovest's stat cards and Custo's wordmark do before a photograph enters the frame.
 
@@ -201,7 +230,7 @@ No shadows anywhere in the system. Elevation is communicated purely by moving on
 
 ---
 
-## 8. Layout
+## 9. Layout
 
 **Marketing (landing):** vertically stacked single column, 1180px max-width, alternating Ink and Paper bands at 96px gaps (desktop) — Ink hero first, then Paper for "Cómo funciona" and the catalog preview, Ink again for the footer/disclaimer band if weight is needed there, or Paper if the disclaimer should read as fine print rather than a brand statement (current implementation: Paper footer — legal text is not a brand moment).
 
@@ -209,7 +238,7 @@ No shadows anywhere in the system. Elevation is communicated purely by moving on
 
 ---
 
-## 9. Agent Prompt Guide
+## 10. Agent Prompt Guide
 
 **Quick Color Reference**
 - background (brand): Ink `#0e0d0c` / background (app): Paper `#f7f3ea`
@@ -233,17 +262,18 @@ No shadows anywhere in the system. Elevation is communicated purely by moving on
 
 ---
 
-## 10. Similar Brands
+## 11. Similar Brands
 
 - **Vinovest** — Primary *style* reference: black canvas, editorial serif numerals in warm ivory, restrained stat-forward layout. Explicitly **not** a reference for voice/positioning — see §0.
 - **Custo** — Achromatic gallery restraint, monolithic single-family typography, hairline borders, zero shadows, ghost-pill primary actions. Source of the "no shadows, one hairline weight" discipline.
 - **Aker** — Whisper-weight display type at monumental scale, single warm accent used sparingly, Ink/Paper alternating section rhythm, 999px pill radius on every interactive pill. Source of the section-alternation layout model and the pill-radius language.
 - **Aesop** — Same warm-neutral (never stark black/white) palette discipline and editorial restraint in a category (retail) that also has to feel trustworthy with something people spend real money on.
 - **Net-a-Porter Editorial / Porter Magazine** — Same serif-headline-on-dark-canvas-with-stat-callouts pattern, applied to a commerce context that still needed to feel like a magazine, not a store.
+- **Aceternity UI** — Not a brand, a component pattern source: the pointer-tracked spotlight-border card (§7) is a restrained, single-hue adaptation of Aceternity's hover-glow card pattern — same mechanism, none of its typical multi-color rainbow treatment.
 
 ---
 
-## 11. Quick Start — CSS Custom Properties
+## 12. Quick Start — CSS Custom Properties
 
 ```css
 :root {
