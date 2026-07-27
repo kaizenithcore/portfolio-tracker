@@ -24,6 +24,8 @@
 
 Two surface registers, not a light/dark toggle: **Ink** is the brand register (marketing hero, nav, footer, empty states) — near-black with warm ivory ink, editorial-gallery mode. **Paper** is the working register (dashboard, collection, forms) — a warm off-white where dense real data (tables, forms, numbers people are trusting) stays comfortable to read for minutes at a time, not seconds. Both share the same single accent and the same type system; nothing about them should read as two different products.
 
+**On Atlas Card's Sapphire Volt:** the Atlas Card reference (§11) is built around one rule Acervo already had — a single chromatic accent, kept rare, reserved for the primary button and the brand mark. That rule doesn't require a new hue; it requires *discipline about the existing one*. Garnet fills the Sapphire Volt role unchanged. What Atlas actually adds to this system is everything typographic and structural: the monospace annotation voice, the logo-badge component, and the extreme-restraint layout language — see §2 and §4.
+
 | Name | Value | Token | Role |
 |------|-------|-------|------|
 | Ink | `#0e0d0c` | `--color-ink` | Primary dark canvas — hero, nav, footer, brand-forward sections |
@@ -69,20 +71,28 @@ Two families, strict division of labor: the serif is a *brand instrument*, not a
 - **Letter spacing:** -0.01em to -0.02em at display sizes, normal below 40px
 - **Role:** Brand-forward numerals and headlines exclusively — never UI chrome, never body copy, never a button label
 
-### Geist Variable — UI sans for everything else: nav, buttons, forms, tables, body copy, captions. Already the project's installed font (`@fontsource-variable/geist`) — no change needed here, just a stricter job description. · `--font-sans`
+### Geist Variable — UI sans for everything else: nav, buttons, forms, tables, body copy. Already the project's installed font (`@fontsource-variable/geist`) — no change needed here, just a stricter job description. · `--font-sans`
 - **Weights:** 400 (body), 500 (labels, emphasis), 600 (nav/section labels, buttons)
-- **Sizes:** 13px, 14px, 15px, 16px, 20px
+- **Sizes:** 14px, 15px, 16px, 20px
 - **Line height:** 1.3–1.6 (tighter for labels, looser for paragraphs)
-- **Letter spacing:** 0.02em uppercase for kicker/section labels only; normal everywhere else
+- **Letter spacing:** normal throughout — uppercase tracking moved to the mono kicker voice below
+
+### JetBrains Mono Variable — The annotation voice: kickers, legal fine print, confidence-rationale footnotes, stat labels, eyebrow text. Adopted from the Atlas Card reference (§11) — a monospaced counterpoint the moment the page needs to say "this is a footnote, not a pitch." Never a headline, never a button label, never body copy. · `--font-mono`
+- **Source:** `@fontsource-variable/jetbrains-mono` (self-hosted, variable)
+- **Weights:** 400 (Regular), 500 (kickers only)
+- **Sizes:** 11px, 12px, 13px
+- **Line height:** 1.5–1.6
+- **Letter spacing:** 0.04–0.06em, always uppercase when used as a kicker; normal-case and no tracking for disclaimers/footnotes
+- **Role:** Captions, disclaimers, confidence-rationale annotations, kicker/eyebrow labels above Fraunces section headings. This is the one addition the Atlas Card pass brings — everything else in that reference (Sequel Sans display, Sapphire Volt accent, pill radii) already had an Acervo equivalent (Fraunces, Garnet, `--radius-pill`), so it wasn't duplicated.
 
 ### Type Scale
 
 | Role | Font | Size | Line Height | Weight | Token |
 |------|------|------|-------------|--------|-------|
-| caption | Geist | 13px | 1.4 | 400 | `--text-caption` |
+| annotation | JetBrains Mono | 12px | 1.6 | 400 | `--text-annotation` |
+| kicker | JetBrains Mono | 12px | 1.5 | 500, uppercase, 0.05em | `--text-kicker` |
 | body | Geist | 15px | 1.55 | 400 | `--text-body` |
 | ui-label | Geist | 14px | 1.3 | 500 | `--text-ui-label` |
-| kicker | Geist | 13px | 1.3 | 600, uppercase, 0.02em | `--text-kicker` |
 | subheading | Geist | 20px | 1.4 | 500 | `--text-subheading` |
 | heading | Fraunces | 28px | 1.2 | 400 | `--text-heading` |
 | heading-lg | Fraunces | 40px | 1.12 | 400 | `--text-heading-lg` |
@@ -145,7 +155,27 @@ Garnet fill, Ivory text, 999px radius, same padding as the ghost variant, Geist 
 ### Kicker Label
 **Role:** Small overline preceding a marketing section heading — "Cómo funciona", "Una muestra de nuestro catálogo"
 
-Geist 600, 13px, uppercase, letter-spacing 0.02em, Stone/Stone Light, sits 8px above the Fraunces heading it introduces.
+JetBrains Mono 500, 12px, uppercase, letter-spacing 0.05em, Stone/Stone Light, sits 8px above the Fraunces heading it introduces. Moved from Geist to mono in the Atlas Card pass — the monospace shift is what makes it read as a deliberate label rather than a small heading.
+
+### Annotation Caption
+**Role:** Legal fine print, disclaimers, confidence-rationale footnotes — anything that should read as "annotation," not persuasion
+
+JetBrains Mono 400, 12px, line-height 1.6, Stone (Paper) / Stone Light (Ink), normal case, no letter-spacing. Centered when it stands alone below a CTA (the footer disclaimer); left-aligned inline when it annotates another element (a confidence-badge tooltip). Adopted wholesale from Atlas Card's ApercuMono footnote voice — the one component that reads as strictly better than what preceded it, so it replaces the plain-Geist disclaimer treatment everywhere.
+
+### Logo Badge
+**Role:** Compact brand mark — favicon, browser tab, app icon, anywhere the full wordmark lockup won't fit
+
+A rounded-square mark (10px radius), Ivory background, containing a single "A" set in Fraunces 400 at roughly 60% of the square's height, Garnet-colored. Minimum comfortable size ~32px square; scales cleanly down to 16px (favicon) because it's a single glyph, not the two-word lockup. This is a placeholder monogram, not a commissioned logotype — revisit if/when Acervo gets real logo design.
+
+### Scroll Indicator
+**Role:** Quiet cue that there's more below the hero, used only when the hero is close to full-viewport height
+
+A single 1px × 40px vertical hairline in Stone Light, centered at the bottom of the Ink hero, sitting 24px above the fold. No label, no arrow, no bounce animation — per Atlas Card, the line's placement alone does the job. Omit entirely on short heroes where the next section is already partly visible on load.
+
+### Centered Editorial Block
+**Role:** A short brand-voice statement between the hero and the functional sections — the one place Acervo gets to sound like a magazine for a sentence or two
+
+Max-width 640px, centered horizontally and in text-align, Geist 400 at 20px (not Fraunces — see Do's & Don'ts: only one serif display moment per screen, and the hero headline already claims it), line-height 1.5, Ivory or Charcoal depending on surface. Adapted from Atlas Card's Centered Body Block, which sets this in its display serif; Acervo's stricter "one serif moment per screen" rule keeps it in the sans instead.
 
 ### Section Divider (Ink ↔ Paper)
 **Role:** The seam between a brand-forward band and a working-app or content band
@@ -270,6 +300,8 @@ Every entrance animation checks `prefers-reduced-motion: reduce` first and, if s
 - **Aesop** — Same warm-neutral (never stark black/white) palette discipline and editorial restraint in a category (retail) that also has to feel trustworthy with something people spend real money on.
 - **Net-a-Porter Editorial / Porter Magazine** — Same serif-headline-on-dark-canvas-with-stat-callouts pattern, applied to a commerce context that still needed to feel like a magazine, not a store.
 - **Aceternity UI** — Not a brand, a component pattern source: the pointer-tracked spotlight-border card (§7) is a restrained, single-hue adaptation of Aceternity's hover-glow card pattern — same mechanism, none of its typical multi-color rainbow treatment.
+- **Atlas Card** — Source of the monospace annotation voice (§2), the Logo Badge and Scroll Indicator components (§4), and the "invitation-only" extreme-restraint layout discipline (single centered column, near-absent nav, generous void). Its Sapphire Volt accent and Sequel Sans display face were *not* adopted — Garnet and Fraunces already filled those roles; see the note in §1.
+- **Apple Card / Amex Centurion** — Same dark-canvas, single-object, near-invitation-only positioning Atlas Card borrows from — useful as the deeper reference for how sparse a premium financial-adjacent product can get before it reads as empty rather than confident.
 
 ---
 
@@ -306,11 +338,12 @@ Every entrance animation checks `prefers-reduced-motion: reduce` first and, if s
   /* Typography */
   --font-fraunces: 'Fraunces Variable', 'Fraunces', ui-serif, Georgia, serif;
   --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --text-caption: 13px;
+  --text-annotation: 12px;
+  --text-kicker: 12px;
   --text-body: 15px;
   --text-ui-label: 14px;
-  --text-kicker: 13px;
   --text-subheading: 20px;
   --text-heading: 28px;
   --text-heading-lg: 40px;
@@ -353,6 +386,7 @@ Every entrance animation checks `prefers-reduced-motion: reduce` first and, if s
   --color-status-bajo-bg: #f3dfd8;
 
   --font-fraunces: 'Fraunces Variable', 'Fraunces', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --radius-pill: 999px;
 }

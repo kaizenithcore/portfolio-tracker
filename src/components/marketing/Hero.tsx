@@ -24,7 +24,7 @@ export function Hero() {
         <div className="max-w-2xl">
           <p
             data-reveal-item
-            className="text-[13px] font-semibold tracking-[0.02em] text-garnet-bright uppercase"
+            className="font-mono text-xs font-medium tracking-[0.05em] text-garnet-bright uppercase"
           >
             Vino español, valorado con honestidad
           </p>

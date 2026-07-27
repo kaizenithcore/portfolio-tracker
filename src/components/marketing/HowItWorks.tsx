@@ -23,7 +23,7 @@ export function HowItWorks() {
   return (
     <div className="bg-paper px-4 py-16 sm:py-24">
       <div ref={ref} className="mx-auto max-w-[1180px]">
-        <p data-reveal-item className="text-[13px] font-semibold tracking-[0.02em] text-stone uppercase">
+        <p data-reveal-item className="font-mono text-xs font-medium tracking-[0.05em] text-stone uppercase">
           Cómo funciona
         </p>
         <h2
@@ -36,7 +36,7 @@ export function HowItWorks() {
         <div className="mt-12 grid gap-10 sm:grid-cols-3">
           {STEPS.map((step, index) => (
             <div key={step.title} data-reveal-item>
-              <p className="font-heading text-2xl text-garnet">{`0${index + 1}`}</p>
+              <p className="font-mono text-sm text-garnet">{`0${index + 1}`}</p>
               <h3 className="mt-2 text-[15px] font-semibold text-charcoal">{step.title}</h3>
               <p className="mt-1 text-[15px] leading-relaxed text-stone">{step.description}</p>
             </div>

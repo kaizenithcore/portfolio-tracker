@@ -19,7 +19,7 @@ export function CatalogPreview() {
   return (
     <div className="bg-paper px-4 pb-16 sm:pb-24">
       <div ref={ref} className="mx-auto max-w-[1180px]">
-        <p data-reveal-item className="text-[13px] font-semibold tracking-[0.02em] text-stone uppercase">
+        <p data-reveal-item className="font-mono text-xs font-medium tracking-[0.05em] text-stone uppercase">
           El catálogo
         </p>
         <h2
