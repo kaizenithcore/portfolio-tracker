@@ -17,18 +17,24 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <div className="mx-auto max-w-4xl px-4 py-16">
-      <h2 className="mb-10 text-center text-2xl font-semibold">Cómo funciona</h2>
-      <div className="grid gap-8 sm:grid-cols-3">
-        {STEPS.map((step, index) => (
-          <div key={step.title} className="text-center">
-            <div className="mx-auto mb-3 flex size-8 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">
-              {index + 1}
+    <div className="bg-paper px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-[1180px]">
+        <p className="text-[13px] font-semibold tracking-[0.02em] text-stone uppercase">
+          Cómo funciona
+        </p>
+        <h2 className="mt-2 font-heading text-3xl font-normal text-charcoal sm:text-4xl">
+          De la botella al valor, en tres pasos
+        </h2>
+
+        <div className="mt-12 grid gap-10 sm:grid-cols-3">
+          {STEPS.map((step, index) => (
+            <div key={step.title}>
+              <p className="font-heading text-2xl text-garnet">{`0${index + 1}`}</p>
+              <h3 className="mt-2 text-[15px] font-semibold text-charcoal">{step.title}</h3>
+              <p className="mt-1 text-[15px] leading-relaxed text-stone">{step.description}</p>
             </div>
-            <h3 className="font-medium">{step.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{step.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -8,15 +8,15 @@ export const CONFIDENCE_META: Record<
 > = {
   alto: {
     label: 'Confianza alta',
-    badgeClassName: 'bg-emerald-100 text-emerald-900 dark:bg-emerald-900/40 dark:text-emerald-200',
+    badgeClassName: 'bg-status-alto-bg text-status-alto',
   },
   medio: {
     label: 'Confianza media',
-    badgeClassName: 'bg-amber-100 text-amber-900 dark:bg-amber-900/40 dark:text-amber-200',
+    badgeClassName: 'bg-status-medio-bg text-status-medio',
   },
   bajo: {
     label: 'Confianza baja',
-    badgeClassName: 'bg-red-100 text-red-900 dark:bg-red-900/40 dark:text-red-200',
+    badgeClassName: 'bg-status-bajo-bg text-status-bajo',
   },
 }
 

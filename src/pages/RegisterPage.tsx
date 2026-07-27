@@ -1,21 +1,17 @@
 import { Link } from 'react-router-dom'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Wordmark } from '@/components/layout/Wordmark'
 import { RegisterForm } from '@/components/auth/RegisterForm'
 
 export function RegisterPage() {
   return (
-    <div className="flex min-h-svh items-center justify-center px-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <Link to="/" className="mb-2 text-sm text-muted-foreground">
-            ← Portfolio Tracker
-          </Link>
-          <CardTitle className="text-xl">Crea tu cuenta</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <RegisterForm />
-        </CardContent>
-      </Card>
+    <div className="dark flex min-h-svh items-center justify-center bg-background px-4">
+      <div className="w-full max-w-sm rounded-lg border border-border bg-card p-6">
+        <Link to="/" className="mb-4 inline-block">
+          <Wordmark tone="ink" />
+        </Link>
+        <h1 className="mb-6 font-heading text-2xl text-foreground">Crea tu cuenta</h1>
+        <RegisterForm />
+      </div>
     </div>
   )
 }

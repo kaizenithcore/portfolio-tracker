@@ -1,4 +1,4 @@
-# Portfolio Tracker (Vino) — Contexto para Claude Code
+# Acervo (Vino) — Contexto para Claude Code
 
 Eres el desarrollador fullstack senior de este proyecto. Lee este archivo completo antes de actuar.
 
@@ -6,9 +6,11 @@ Eres el desarrollador fullstack senior de este proyecto. Lee este archivo comple
 
 ## Proyecto
 
-App para coleccionistas de vino español (Rioja, Ribera del Duero, Priorat): registran las botellas de su colección y ven el valor de mercado estimado de cada una y el total de la colección, sin tener que investigar cada vino a mano.
+**Acervo** es la marca paraguas (antes "Portfolio Tracker" — renombrada, ver `docs/DESIGN.md` §0 para el porqué). App para coleccionistas de vino español (Rioja, Ribera del Duero, Priorat): registran las botellas de su colección y ven el valor de mercado estimado de cada una y el total de la colección, sin tener que investigar cada vino a mano. Vino es la primera vertical de Acervo, insinuada de forma sutil (badge "Vino" junto al wordmark), no anunciada como roadmap explícito a los usuarios.
 
-Es el punto de entrada al roadmap de Kaizenith de "Portfolio Tracker" multi-categoría (vino → relojes → arte). Vino se eligió primero por menor complejidad técnica, motivo de compra inmediato, y por evitar el mayor riesgo de coste de datos (arte) y el de competencia madura (relojes, WatchCharts).
+Vino se eligió primero por menor complejidad técnica, motivo de compra inmediato, y por evitar el mayor riesgo de coste de datos (arte) y el de competencia madura (relojes, WatchCharts).
+
+**Identidad visual:** ver `docs/DESIGN.md` — es la referencia obligatoria para cualquier trabajo de UI/diseño en este proyecto (tokens de color, tipografía, componentes, Do's/Don'ts). Resumen rápido: dos registros de superficie — **Ink** (marca/marketing: hero, nav, footer, auth) y **Paper** (app de trabajo: dashboard, colección, formularios) — un único acento (Garnet), serif Fraunces reservada a momentos de marca, sans Geist para todo lo demás.
 
 **Restricción de producto no negociable:** el producto es siempre informativo ("aquí tienes el valor estimado de lo que registras"), nunca una recomendación personalizada de inversión. No añadir nunca copy tipo "deberías comprar X" — eso se acerca a asesoramiento financiero personalizado (EAFI/CNMV), fuera del perímetro legal en el que se diseñó este producto.
 
