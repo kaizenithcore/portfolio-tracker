@@ -8,7 +8,7 @@ export function ConfidenceDistributionCard({ valuation }: { valuation: Portfolio
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="font-mono text-[11px] font-medium tracking-[0.06em] text-muted-foreground uppercase">
           Confianza de las valoraciones
         </CardTitle>
       </CardHeader>

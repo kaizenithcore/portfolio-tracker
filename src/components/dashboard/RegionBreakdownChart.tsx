@@ -15,12 +15,17 @@ import type { Enums } from '@/types/database.types'
 
 type Region = Enums<'wine_region'>
 
-// Color fijo por región (identidad, no por rango) — slots 1-3 de la paleta
-// categórica validada (dataviz skill): pasa CVD/contraste en claro y oscuro.
+// Color fijo por región (identidad, no por rango) — el sistema Acervo reserva
+// el color a un único acento (Garnet), así que el desglose usa tres pasos
+// tonales del mismo acento en vez de una paleta categórica multicolor.
+// Cada barra lleva además su etiqueta de región en texto, no depende del color.
 const REGION_META: Record<Region, { label: string; color: string }> = {
-  rioja: { label: 'Rioja', color: 'var(--chart-1)' },
-  ribera_del_duero: { label: 'Ribera del Duero', color: 'var(--chart-2)' },
-  priorat: { label: 'Priorat', color: 'var(--chart-3)' },
+  rioja: { label: 'Rioja', color: 'var(--color-garnet-bright)' },
+  ribera_del_duero: { label: 'Ribera del Duero', color: 'var(--color-garnet)' },
+  priorat: {
+    label: 'Priorat',
+    color: 'color-mix(in oklab, var(--color-garnet) 55%, var(--color-graphite))',
+  },
 }
 
 export function RegionBreakdownChart({ valuation }: { valuation: PortfolioValuation }) {
@@ -33,7 +38,7 @@ export function RegionBreakdownChart({ valuation }: { valuation: PortfolioValuat
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="font-mono text-[11px] font-medium tracking-[0.06em] text-muted-foreground uppercase">
           Valor por región
         </CardTitle>
       </CardHeader>

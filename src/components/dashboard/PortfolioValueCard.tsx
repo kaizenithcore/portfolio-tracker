@@ -6,12 +6,12 @@ export function PortfolioValueCard({ valuation }: { valuation: PortfolioValuatio
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-[13px] font-semibold tracking-[0.02em] text-muted-foreground uppercase">
+        <CardTitle className="font-mono text-[11px] font-medium tracking-[0.06em] text-muted-foreground uppercase">
           Valor total estimado
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="font-heading text-4xl font-normal text-foreground">
+        <p className="text-4xl font-bold tracking-[-0.01em] text-foreground">
           {formatEur(valuation.totalValueEur)}
         </p>
         <p className="mt-2 text-sm text-muted-foreground">

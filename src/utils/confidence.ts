@@ -2,21 +2,25 @@ import type { Enums } from '@/types/database.types'
 
 type ConfidenceLevel = Enums<'confidence_level'>
 
+// Los niveles de confianza se codifican por peso visual, no por color
+// (verde/ámbar/rojo) — el sistema Acervo reserva el color para un único
+// acento (Garnet). Alto = sólido y compacto; bajo = tenue y punteado.
+// Ver docs/DESIGN.md §"Confidence Badge".
 export const CONFIDENCE_META: Record<
   ConfidenceLevel,
   { label: string; badgeClassName: string }
 > = {
   alto: {
     label: 'Confianza alta',
-    badgeClassName: 'bg-status-alto-bg text-status-alto',
+    badgeClassName: 'border border-paper bg-paper text-void',
   },
   medio: {
     label: 'Confianza media',
-    badgeClassName: 'bg-status-medio-bg text-status-medio',
+    badgeClassName: 'border border-hairline bg-graphite text-frost',
   },
   bajo: {
     label: 'Confianza baja',
-    badgeClassName: 'bg-status-bajo-bg text-status-bajo',
+    badgeClassName: 'border border-dashed border-hairline bg-transparent text-ash',
   },
 }
 

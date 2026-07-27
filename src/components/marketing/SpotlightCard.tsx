@@ -24,7 +24,7 @@ export function SpotlightCard({ children, className, onMouseMove, ...props }: Sp
       ref={ref}
       onMouseMove={handleMouseMove}
       className={cn(
-        'group relative overflow-hidden rounded-lg border border-hairline bg-paper-elevated transition-transform duration-300 hover:-translate-y-0.5',
+        'group relative overflow-hidden rounded-xl border border-hairline bg-obsidian transition-transform duration-300 hover:-translate-y-0.5',
         className,
       )}
       {...props}
@@ -34,7 +34,7 @@ export function SpotlightCard({ children, className, onMouseMove, ...props }: Sp
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
-            'radial-gradient(220px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), color-mix(in oklab, var(--color-garnet) 12%, transparent), transparent 70%)',
+            'radial-gradient(220px circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), color-mix(in oklab, var(--color-garnet) 22%, transparent), transparent 70%)',
         }}
       />
       {children}

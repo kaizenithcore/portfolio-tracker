@@ -1,30 +1,17 @@
 import { cn } from '@/lib/utils'
 
 type WordmarkProps = {
-  tone?: 'ink' | 'paper'
   className?: string
 }
 
-// Lockup de marca: ver docs/DESIGN.md §4 "Wordmark Lockup".
-export function Wordmark({ tone = 'ink', className }: WordmarkProps) {
-  const isInk = tone === 'ink'
-
+// Lockup de marca — un único registro oscuro, ver docs/DESIGN.md §4.
+export function Wordmark({ className }: WordmarkProps) {
   return (
     <span className={cn('inline-flex items-center gap-2', className)}>
-      <span
-        className={cn(
-          'text-[15px] font-semibold tracking-[0.04em] uppercase',
-          isInk ? 'text-ivory' : 'text-charcoal',
-        )}
-      >
+      <span className="text-[15px] font-semibold tracking-[0.06em] text-paper uppercase">
         Acervo
       </span>
-      <span
-        className={cn(
-          'rounded-pill border px-2.5 py-0.5 text-xs font-medium',
-          isInk ? 'border-garnet-bright text-garnet-bright' : 'border-garnet text-garnet',
-        )}
-      >
+      <span className="rounded-pill border border-garnet-bright/50 px-2.5 py-0.5 font-mono text-[10px] tracking-[0.04em] text-garnet-bright uppercase">
         Vino
       </span>
     </span>

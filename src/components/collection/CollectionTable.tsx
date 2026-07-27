@@ -73,9 +73,7 @@ export function CollectionTable({ items }: { items: CollectionItemWithWine[] }) 
                 <TableCell>
                   {item.vintage ?? '—'}
                   {mismatchNote && (
-                    <div className="text-xs text-amber-700 dark:text-amber-400">
-                      añada distinta
-                    </div>
+                    <div className="font-mono text-[11px] text-ash">añada distinta</div>
                   )}
                 </TableCell>
                 <TableCell>{region ? REGION_LABEL[region] : '—'}</TableCell>

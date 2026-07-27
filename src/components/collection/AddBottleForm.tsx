@@ -198,7 +198,7 @@ export function AddBottleForm({ onDone }: AddBottleFormProps) {
       </div>
 
       {vintageMismatchNote && (
-        <p className="rounded-md bg-amber-100 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/40 dark:text-amber-200">
+        <p className="rounded-md border border-dashed border-hairline bg-graphite/50 px-3 py-2 font-mono text-xs text-frost">
           {vintageMismatchNote}
         </p>
       )}

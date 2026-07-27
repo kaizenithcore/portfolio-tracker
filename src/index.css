@@ -2,39 +2,28 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
-@import "@fontsource-variable/fraunces";
 @import "@fontsource-variable/jetbrains-mono";
 
 @custom-variant dark (&:is(.dark *));
 
-/* Sistema de marca Acervo — ver docs/DESIGN.md antes de tocar estos tokens. */
+/* Sistema de marca Acervo — ver docs/DESIGN.md antes de tocar estos tokens.
+   Un único registro: Void (negro puro) + tres pasos de superficie/texto, y
+   Garnet como el único acento cromático del sistema. Nada de Paper claro. */
 @theme inline {
-    --font-heading: var(--font-fraunces);
-    --font-sans: 'Geist Variable', sans-serif;
-    --font-fraunces: 'Fraunces Variable', 'Fraunces', ui-serif, Georgia, serif;
+    --font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --font-heading: var(--font-sans);
     --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-    /* Superficies y tinta de marca (uso directo: bg-ink, text-ivory, etc.) */
-    --color-ink: var(--brand-ink);
-    --color-ink-elevated: var(--brand-ink-elevated);
+    /* Superficies (fondo) y tinta (texto) — uso directo: bg-void, text-paper, etc. */
+    --color-void: var(--brand-void);
+    --color-obsidian: var(--brand-obsidian);
+    --color-graphite: var(--brand-graphite);
+    --color-ash: var(--brand-ash);
+    --color-frost: var(--brand-frost);
     --color-paper: var(--brand-paper);
-    --color-paper-elevated: var(--brand-paper-elevated);
-    --color-ivory: var(--brand-ivory);
-    --color-charcoal: var(--brand-charcoal);
-    --color-stone: var(--brand-stone);
-    --color-stone-light: var(--brand-stone-light);
     --color-hairline: var(--brand-hairline);
-    --color-hairline-ink: var(--brand-hairline-ink);
     --color-garnet: var(--brand-garnet);
     --color-garnet-bright: var(--brand-garnet-bright);
-
-    /* Estados de confianza — nunca sustituyen a Garnet, ver docs/DESIGN.md §1 */
-    --color-status-alto: var(--brand-status-alto);
-    --color-status-alto-bg: var(--brand-status-alto-bg);
-    --color-status-medio: var(--brand-status-medio);
-    --color-status-medio-bg: var(--brand-status-medio-bg);
-    --color-status-bajo: var(--brand-status-bajo);
-    --color-status-bajo-bg: var(--brand-status-bajo-bg);
 
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
@@ -44,11 +33,6 @@
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
     --color-ring: var(--ring);
     --color-input: var(--input);
     --color-border: var(--border);
@@ -74,105 +58,49 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
-    --radius-pill: 999px;
+    --radius-pill: 9999px;
 }
 
 :root {
-    /* Marca — registro Paper (superficie por defecto de la app de trabajo) */
-    --brand-ink: #0e0d0c;
-    --brand-ink-elevated: #1b1917;
-    --brand-paper: #f7f3ea;
-    --brand-paper-elevated: #ffffff;
-    --brand-ivory: #f3ead9;
-    --brand-charcoal: #171310;
-    --brand-stone: #6e6355;
-    --brand-stone-light: #a79c89;
-    --brand-hairline: rgba(23, 19, 16, 0.1);
-    --brand-hairline-ink: rgba(243, 234, 217, 0.14);
-    --brand-garnet: #7a1f3b;
-    --brand-garnet-bright: #c1516e;
-    --brand-status-alto: #4b6b3a;
-    --brand-status-alto-bg: #e8ede0;
-    --brand-status-medio: #8a5a17;
-    --brand-status-medio-bg: #f3e7d2;
-    --brand-status-bajo: #8a3420;
-    --brand-status-bajo-bg: #f3dfd8;
+    /* Marca — tres pasos de superficie (Void → Obsidian → Graphite) y tres
+       pasos de tinta (Ash → Frost → Paper), más el único acento (Garnet). */
+    --brand-void: #000000;
+    --brand-obsidian: #161616;
+    --brand-graphite: #242424;
+    --brand-ash: #868686;
+    --brand-frost: #d1d1d1;
+    --brand-paper: #f4efe6;
+    --brand-hairline: rgba(244, 239, 230, 0.1);
+    --brand-garnet: #8f1734;
+    --brand-garnet-bright: #dd3f68;
 
-    /* Tokens shadcn — mapeados al registro Paper */
-    --background: var(--brand-paper);
-    --foreground: var(--brand-charcoal);
-    --card: var(--brand-paper-elevated);
-    --card-foreground: var(--brand-charcoal);
-    --popover: var(--brand-paper-elevated);
-    --popover-foreground: var(--brand-charcoal);
+    /* Tokens shadcn — un único registro oscuro, sin toggle claro/oscuro */
+    --background: var(--brand-void);
+    --foreground: var(--brand-paper);
+    --card: var(--brand-obsidian);
+    --card-foreground: var(--brand-paper);
+    --popover: var(--brand-obsidian);
+    --popover-foreground: var(--brand-paper);
     --primary: var(--brand-garnet);
-    --primary-foreground: var(--brand-ivory);
-    --secondary: #eee7d8;
-    --secondary-foreground: var(--brand-charcoal);
-    --muted: #eee7d8;
-    --muted-foreground: var(--brand-stone);
-    --accent: #efe2e4;
-    --accent-foreground: var(--brand-garnet);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: rgba(23, 19, 16, 0.1);
-    --input: rgba(23, 19, 16, 0.14);
-    --ring: var(--brand-garnet);
-    /* Paleta categórica validada (dataviz skill) — no confundir con --primary de marca */
-    --chart-1: #2a78d6;
-    --chart-2: #eb6834;
-    --chart-3: #1baf7a;
-    --chart-4: #eda100;
-    --chart-5: #e87ba4;
-    --radius: 0.625rem;
-    --sidebar: var(--brand-ink);
-    --sidebar-foreground: var(--brand-ivory);
-    --sidebar-primary: var(--brand-garnet-bright);
-    --sidebar-primary-foreground: var(--brand-ivory);
-    --sidebar-accent: var(--brand-ink-elevated);
-    --sidebar-accent-foreground: var(--brand-ivory);
-    --sidebar-border: var(--brand-hairline-ink);
-    --sidebar-ring: var(--brand-garnet-bright);
-}
-
-.dark {
-    /* Marca — registro Ink (superficie de marca/marketing) */
-    --brand-status-alto: #9cc17e;
-    --brand-status-alto-bg: rgba(156, 193, 126, 0.16);
-    --brand-status-medio: #e0b368;
-    --brand-status-medio-bg: rgba(224, 179, 104, 0.16);
-    --brand-status-bajo: #e08b6e;
-    --brand-status-bajo-bg: rgba(224, 139, 110, 0.16);
-
-    --background: var(--brand-ink);
-    --foreground: var(--brand-ivory);
-    --card: var(--brand-ink-elevated);
-    --card-foreground: var(--brand-ivory);
-    --popover: var(--brand-ink-elevated);
-    --popover-foreground: var(--brand-ivory);
-    --primary: var(--brand-garnet-bright);
-    --primary-foreground: var(--brand-ink);
-    --secondary: var(--brand-ink-elevated);
-    --secondary-foreground: var(--brand-ivory);
-    --muted: var(--brand-ink-elevated);
-    --muted-foreground: var(--brand-stone-light);
-    --accent: #2a1c20;
+    --primary-foreground: var(--brand-paper);
+    --secondary: var(--brand-graphite);
+    --secondary-foreground: var(--brand-paper);
+    --muted: var(--brand-graphite);
+    --muted-foreground: var(--brand-ash);
+    --accent: var(--brand-graphite);
     --accent-foreground: var(--brand-garnet-bright);
     --destructive: oklch(0.704 0.191 22.216);
-    --border: var(--brand-hairline-ink);
-    --input: var(--brand-hairline-ink);
+    --border: var(--brand-hairline);
+    --input: var(--brand-hairline);
     --ring: var(--brand-garnet-bright);
-    --chart-1: #3987e5;
-    --chart-2: #d95926;
-    --chart-3: #199e70;
-    --chart-4: #c98500;
-    --chart-5: #d55181;
-    --sidebar: var(--brand-ink);
-    --sidebar-foreground: var(--brand-ivory);
+    --radius: 0.625rem;
+    --sidebar: var(--brand-void);
+    --sidebar-foreground: var(--brand-paper);
     --sidebar-primary: var(--brand-garnet-bright);
-    --sidebar-primary-foreground: var(--brand-ivory);
-    --sidebar-accent: var(--brand-ink-elevated);
-    --sidebar-accent-foreground: var(--brand-ivory);
-    --sidebar-border: var(--brand-hairline-ink);
+    --sidebar-primary-foreground: var(--brand-paper);
+    --sidebar-accent: var(--brand-obsidian);
+    --sidebar-accent-foreground: var(--brand-paper);
+    --sidebar-border: var(--brand-hairline);
     --sidebar-ring: var(--brand-garnet-bright);
 }
 
