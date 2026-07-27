@@ -172,8 +172,13 @@ Mono 400, 11–12px, line-height 1.5–1.6, Ash, normal case, no letter-spacing.
 
 Max-width 640px, centered horizontally and in text-align, Geist 400 at 20–24px, line-height 1.5, Paper on Void. Directly adopted from Atlas's Centered Body Block.
 
+### Feature Section
+**Role:** The landing's primary content unit — used three times ("El catálogo", "Tu colección", "Confianza"), each pairing a real photograph with a substantive explanation instead of a thin bullet list
+
+Two-column grid at `lg:` (stacks on mobile): text column carries a mono Garnet-Bright kicker, a 2-3-line Geist 700 headline (32–44px), a description paragraph, then 2-3 sub-features below a hairline divider (each a Geist 600 15px mini-heading + Ash/Frost body). Image column carries a single `aspect-[4/5]` photograph, 12px radius, with a mono caption below it. Alternates `reverse` (image left/right) and `surface` (Void/Obsidian) section to section for rhythm — see §10. Adapted directly from atlascard.com's repeating feature-section pattern (kicker → big headline → description → photo → sub-features → optional link), scaled down from Atlas's ~6 sections to 3 to match Acervo's actual current scope.
+
 ### Numbered List Item
-**Role:** The "Cómo funciona" three-step explainer
+**Role:** Legacy pattern, superseded by Feature Section's sub-features list for the landing — kept here for any future compact three-step explainer that doesn't need a full Feature Section (a settings page, an in-app tooltip flow, etc.)
 
 Two-digit number (`01`, `02`, `03`) in mono, Ash, above a hairline top-border; label in Geist 600 15px Paper; description in Geist 400 15px Frost.
 
@@ -242,15 +247,19 @@ Every entrance animation checks `prefers-reduced-motion: reduce` first and, if s
 
 ## 9. Imagery
 
-**Current state: none.** No product photography exists (bottles belong to users, not to Acervo) and there's no imagery budget for this MVP. The system carries full brand weight on typography and color alone.
+**Current state: real stock photography + one hero video loop**, sourced from Pexels (free license, no attribution required) and self-hosted in `public/media/` rather than hotlinked. There is still no owned product photography — bottles belong to users, not to Acervo — so every image is atmospheric/contextual (cellars, barrels, bottles), never a specific labeled bottle presented as "ours."
 
-**If/when imagery is introduced:** full-bleed or 12px-radius contained photography on Obsidian backgrounds only, desaturated/high-key treatment, no illustrations, no stock-photo people.
+**Treatment:** 12px-radius contained photography (`aspect-[4/5]` in feature sections, `aspect-[4/3]` in the hero teaser strip), no full-bleed hero photography — the hero uses a muted, looping background video instead (`hero-loop.mp4`, ~6MB SD, opacity-reduced with a Void gradient overlay on top so text stays legible without a separate scrim layer). A black-and-white image is used at least once (the confidence-section photo) so imagery can reinforce the one-accent discipline instead of fighting it. No illustrations, no stock-photo people, no invented product shots.
+
+**Motion:** the hero video respects `prefers-reduced-motion: reduce` — it swaps to a static poster-equivalent image instead of autoplaying, mirroring the same accessibility floor as the scroll-reveal system in §8.
+
+**If more imagery is added later:** keep sourcing free-license stock (Pexels/Unsplash) self-hosted in `public/media/`, same desaturated/atmospheric treatment, same 12px radius — never hotlink a third-party CDN directly in production.
 
 ---
 
 ## 10. Layout
 
-**Marketing (landing):** vertically stacked single column, 1180px max-width, Void throughout with hairline seams between sections (no Ink/Paper alternation anymore — that was the retired two-register model).
+**Marketing (landing):** vertically stacked single column, 1180px max-width. Sections alternate Void ↔ Obsidian background (not a hard rule of one-tone-only — the alternation is the section-to-section contrast mechanism now, replacing the retired Ink/Paper two-register model) with hairline seams between every section regardless of tone.
 
 **App (authenticated screens):** Void canvas throughout, 1024px max content width, standard spacing. Nav bar is Void with a Hairline bottom border; cards are Obsidian. There is no surface distinction between "marketing" and "app" anymore — one register, everywhere.
 
