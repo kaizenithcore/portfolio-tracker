@@ -17,35 +17,25 @@ export function CatalogPreview() {
   const ref = useScrollReveal<HTMLDivElement>({ itemSelector: '[data-reveal-item]' })
 
   return (
-    <div className="bg-void px-4 pb-16 sm:pb-24">
-      <div ref={ref} className="mx-auto max-w-[1180px]">
-        <p data-reveal-item className="font-mono text-xs font-medium tracking-[0.08em] text-ash uppercase">
-          El catálogo
+    <div className="border-t border-hairline bg-obsidian px-4 pb-20 sm:pb-28">
+      <div ref={ref} className="mx-auto max-w-[1180px] pt-12">
+        <p data-reveal-item className="font-mono text-[11px] tracking-[0.04em] text-ash uppercase">
+          Una muestra real, no un mockup
         </p>
-        <h2 data-reveal-item className="mt-2 text-3xl font-bold tracking-[-0.01em] text-paper sm:text-4xl">
-          Una muestra de lo que ya hemos investigado
-        </h2>
-        <p data-reveal-item className="mt-3 max-w-lg text-[15px] text-frost">
-          Cada vino muestra su nivel de confianza — no todas las valoraciones tienen
-          la misma fiabilidad, y creemos que debes saberlo.
-        </p>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {isLoading &&
-            Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-24 bg-graphite" />)}
+            Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-32 bg-graphite" />)}
           {wines?.map((wine) => (
             <SpotlightCard key={wine.id} className="p-4" data-reveal-item>
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-[15px] font-medium text-paper">{wine.name}</p>
-                  <p className="text-sm text-ash">
-                    {wine.winery} · {REGION_LABEL[wine.region]}
-                    {wine.vintage && ` · ${wine.vintage}`}
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-paper">
-                    {formatEur(wine.estimated_market_price_eur)}
-                  </p>
-                </div>
+              <p className="text-[15px] font-medium text-paper">{wine.name}</p>
+              <p className="text-sm text-ash">
+                {wine.winery} · {REGION_LABEL[wine.region]}
+                {wine.vintage && ` · ${wine.vintage}`}
+              </p>
+              <p className="mt-2 text-sm font-medium text-paper">
+                {formatEur(wine.estimated_market_price_eur)}
+              </p>
+              <div className="mt-2">
                 <ConfidenceBadge
                   level={wine.confidence_level}
                   rationale={wine.confidence_rationale}
