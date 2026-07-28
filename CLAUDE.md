@@ -10,7 +10,7 @@ Eres el desarrollador fullstack senior de este proyecto. Lee este archivo comple
 
 Vino se eligió primero por menor complejidad técnica, motivo de compra inmediato, y por evitar el mayor riesgo de coste de datos (arte) y el de competencia madura (relojes, WatchCharts).
 
-**Identidad visual:** ver `docs/DESIGN.md` — es la referencia obligatoria para cualquier trabajo de UI/diseño en este proyecto (tokens de color, tipografía, componentes, Do's/Don'ts). Resumen rápido: dos registros de superficie — **Ink** (marca/marketing: hero, nav, footer, auth) y **Paper** (app de trabajo: dashboard, colección, formularios) — un único acento (Garnet), serif Fraunces reservada a momentos de marca, sans Geist para todo lo demás.
+**Identidad visual:** ver `docs/DESIGN.md` — es la referencia obligatoria para cualquier trabajo de UI/diseño en este proyecto (tokens de color, tipografía, componentes, Do's/Don'ts). Resumen rápido: un único registro oscuro (**Void**, negro puro) en toda la app, sin partición marca/app; tres pasos de superficie (Void→Obsidian→Graphite) y de tinta (Ash→Frost→Paper); un único acento cromático (**Garnet**); sans Geist + mono JetBrains Mono, sin serif. Landing construida con el patrón "Feature Section" (kicker + titular + foto real + sub-características), imágenes/vídeo de stock reales en `public/media/` (Pexels, licencia libre, auto-alojados).
 
 **Restricción de producto no negociable:** el producto es siempre informativo ("aquí tienes el valor estimado de lo que registras"), nunca una recomendación personalizada de inversión. No añadir nunca copy tipo "deberías comprar X" — eso se acerca a asesoramiento financiero personalizado (EAFI/CNMV), fuera del perímetro legal en el que se diseñó este producto.
 
@@ -33,6 +33,21 @@ Vino se eligió primero por menor complejidad técnica, motivo de compra inmedia
 5. **Migraciones SQL versionadas** en `supabase/migrations/`, nombradas `<timestamp>_descripcion.sql`. Nunca cambios de esquema desde el dashboard de Supabase.
 6. **Deploy manual y confirmado.** Nunca ejecutar `deploy_to_vercel` sin que el usuario lo haya confirmado explícitamente en el chat para ese despliegue concreto.
 7. **Copy legal:** cualquier texto nuevo cerca de precios/valoraciones debe evitar lenguaje de recomendación personalizada. Ver barrido de copy en el plan de QA.
+
+---
+
+## Modelo de ingresos (decidido — no implementado todavía)
+
+Benchmark verificado (julio 2026): CellarTracker (el competidor más comparable — registro + valoración, no gestión de activos) cobra $40/año (100 botellas) a $500/año (2.500+), freemium por tamaño de colección. Wine-Searcher PRO $10,99/mes (herramienta de trade). WatchCharts $160-$800/año (más caro, audiencia más profesional). Vinovest cobra 1,9-2,85% anual sobre activos gestionados — no comparable, es custodia de patrimonio, no SaaS informativo.
+
+**Estructura decidida:**
+- **Acervo Gratis**: hasta 15 botellas registradas, catálogo completo, dashboard básico, badges de confianza. Sin límite de tiempo.
+- **Acervo Plus** — €4,99/mes o €39/año: colección ilimitada, informe PDF exportable (seguro/herencia), alertas de ventana de consumo (cuando exista), acceso prioritario a futuras verticales.
+- **Add-on de pago único**: informe PDF de una botella/colección puntual, €2,99, sin necesidad de suscripción.
+- **Oferta de fundador**: precio congelado (~€29/año) para los 10-15 coleccionistas de la fase de validación, a cambio de feedback.
+- **Modelo de cobro**: suscripción recurrente, no licencia de pago único — el catálogo y los datos de mercado se actualizan continuamente, es un servicio vivo.
+
+**Estado de implementación: ninguno todavía, y así debe seguir por ahora.** Decisión explícita del usuario: seguir 100% gratis (sin muro de pago, sin Stripe) hasta validar retención real con los primeros coleccionistas — cobrar demasiado pronto contaminaría esa señal. No implementar el límite de 15 botellas, Stripe, ni ningún gate de pago sin que el usuario lo pida explícitamente. Estos planes están documentados aquí como referencia de diseño de producto (p. ej. al decidir qué funciones nuevas son candidatas naturales a "Plus"), no como tarea pendiente de sprint.
 
 ---
 
