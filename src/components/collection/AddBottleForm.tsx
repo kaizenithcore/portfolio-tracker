@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -56,6 +56,7 @@ export function AddBottleForm({ onDone }: AddBottleFormProps) {
     register,
     handleSubmit,
     watch,
+    control,
     formState: { errors },
   } = useForm<AddBottleDetailsInput, unknown, AddBottleDetailsValues>({
     resolver: zodResolver(addBottleDetailsSchema),
@@ -205,17 +206,24 @@ export function AddBottleForm({ onDone }: AddBottleFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="condition">Condición</Label>
-        <select
-          id="condition"
-          className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-          {...register('condition')}
-        >
-          {CONDITION_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
+        <Controller
+          control={control}
+          name="condition"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger id="condition" className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {CONDITION_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
       </div>
 
       <div className="grid grid-cols-2 gap-4">

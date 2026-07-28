@@ -43,13 +43,25 @@ export function CollectionTable({ items }: { items: CollectionItemWithWine[] }) 
     <>
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Vino</TableHead>
-            <TableHead>Añada</TableHead>
-            <TableHead>Región</TableHead>
-            <TableHead className="text-right">Cantidad</TableHead>
-            <TableHead>Condición</TableHead>
-            <TableHead className="text-right">Valor estimado</TableHead>
+          <TableRow className="hover:bg-transparent">
+            <TableHead className="font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Vino
+            </TableHead>
+            <TableHead className="font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Añada
+            </TableHead>
+            <TableHead className="font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Región
+            </TableHead>
+            <TableHead className="text-right font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Cantidad
+            </TableHead>
+            <TableHead className="font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Condición
+            </TableHead>
+            <TableHead className="text-right font-mono text-[11px] tracking-[0.05em] text-ash uppercase">
+              Valor estimado
+            </TableHead>
             <TableHead className="w-10" />
           </TableRow>
         </TableHeader>
@@ -65,31 +77,33 @@ export function CollectionTable({ items }: { items: CollectionItemWithWine[] }) 
               : null
 
             return (
-              <TableRow key={item.id}>
+              <TableRow key={item.id} className="border-hairline">
                 <TableCell>
-                  <div className="font-medium">{name}</div>
-                  <div className="text-xs text-muted-foreground">{winery}</div>
+                  <div className="font-medium text-paper">{name}</div>
+                  <div className="text-xs text-ash">{winery}</div>
                 </TableCell>
-                <TableCell>
+                <TableCell className="tabular-nums text-frost">
                   {item.vintage ?? '—'}
                   {mismatchNote && (
                     <div className="font-mono text-[11px] text-ash">añada distinta</div>
                   )}
                 </TableCell>
-                <TableCell>{region ? REGION_LABEL[region] : '—'}</TableCell>
-                <TableCell className="text-right">{item.quantity}</TableCell>
-                <TableCell className="capitalize">{item.condition}</TableCell>
+                <TableCell className="text-frost">{region ? REGION_LABEL[region] : '—'}</TableCell>
+                <TableCell className="text-right tabular-nums text-frost">{item.quantity}</TableCell>
+                <TableCell className="text-frost capitalize">{item.condition}</TableCell>
                 <TableCell className="text-right">
                   {totalValue !== null ? (
                     <div className="flex items-center justify-end gap-2">
-                      <span>{formatEur(totalValue)}</span>
+                      <span className="tabular-nums font-medium text-paper">
+                        {formatEur(totalValue)}
+                      </span>
                       <ConfidenceBadge
                         level={item.reference_wine!.confidence_level}
                         rationale={mismatchNote ?? item.reference_wine!.confidence_rationale}
                       />
                     </div>
                   ) : (
-                    <span className="text-xs text-muted-foreground">Sin valorar</span>
+                    <span className="font-mono text-xs text-ash">Sin valorar</span>
                   )}
                 </TableCell>
                 <TableCell>

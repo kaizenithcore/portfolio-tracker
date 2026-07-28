@@ -8,6 +8,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import { Skeleton } from '@/components/ui/skeleton'
+import { PageHeader } from '@/components/layout/PageHeader'
+import { EmptyState } from '@/components/layout/EmptyState'
 import { AddBottleForm } from '@/components/collection/AddBottleForm'
 import { CollectionTable } from '@/components/collection/CollectionTable'
 import { useCollection } from '@/hooks/useCollection'
@@ -18,49 +20,53 @@ export function CollectionPage() {
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-semibold">Mi colección</h1>
-          <p className="mt-1 text-muted-foreground">
-            Registra tus botellas y consulta su valor estimado de mercado.
-          </p>
-        </div>
-        <Dialog open={addOpen} onOpenChange={setAddOpen}>
-          <Button onClick={() => setAddOpen(true)}>
-            <Plus className="mr-1 size-4" />
-            Añadir botella
-          </Button>
-          {addOpen && (
-            <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
-              <DialogHeader>
-                <DialogTitle>Añadir botella a la colección</DialogTitle>
-              </DialogHeader>
-              <AddBottleForm onDone={() => setAddOpen(false)} />
-            </DialogContent>
-          )}
-        </Dialog>
-      </div>
+      <PageHeader
+        kicker="Mi colección"
+        title="Botellas registradas"
+        description="Busca en el catálogo o añade a mano — cada botella lleva su valor estimado y su nivel de confianza."
+        action={
+          <Dialog open={addOpen} onOpenChange={setAddOpen}>
+            <Button onClick={() => setAddOpen(true)}>
+              <Plus className="mr-1 size-4" />
+              Añadir botella
+            </Button>
+            {addOpen && (
+              <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-lg">
+                <DialogHeader>
+                  <DialogTitle>Añadir botella a la colección</DialogTitle>
+                </DialogHeader>
+                <AddBottleForm onDone={() => setAddOpen(false)} />
+              </DialogContent>
+            )}
+          </Dialog>
+        }
+      />
 
       {isLoading && (
         <div className="space-y-2">
-          <Skeleton className="h-12 w-full" />
-          <Skeleton className="h-12 w-full" />
-          <Skeleton className="h-12 w-full" />
+          <Skeleton className="h-12 w-full bg-graphite" />
+          <Skeleton className="h-12 w-full bg-graphite" />
+          <Skeleton className="h-12 w-full bg-graphite" />
         </div>
       )}
 
       {!isLoading && items && items.length === 0 && (
-        <div className="rounded-lg border border-dashed py-16 text-center">
-          <p className="text-muted-foreground">Todavía no has añadido ninguna botella.</p>
-          <Button className="mt-4" onClick={() => setAddOpen(true)}>
-            <Plus className="mr-1 size-4" />
-            Añade tu primera botella
-          </Button>
-        </div>
+        <EmptyState
+          image="/media/bottles-shelf.jpg"
+          imageAlt="Botellas de vino ordenadas en una estantería de bodega"
+          title="Todavía no has añadido ninguna botella"
+          description="Busca tu vino en el catálogo investigado o regístralo a mano si no está — tarda menos de un minuto."
+          action={
+            <Button onClick={() => setAddOpen(true)}>
+              <Plus className="mr-1 size-4" />
+              Añade tu primera botella
+            </Button>
+          }
+        />
       )}
 
       {!isLoading && items && items.length > 0 && (
-        <div className="rounded-lg border">
+        <div className="overflow-hidden rounded-xl border border-hairline bg-obsidian">
           <CollectionTable items={items} />
         </div>
       )}

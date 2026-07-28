@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'sonner'
 import {
@@ -12,6 +12,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { useUpdateCollectionItem } from '@/hooks/useUpdateCollectionItem'
 import {
   addBottleDetailsSchema,
@@ -39,6 +46,7 @@ export function EditBottleDialog({ item, open, onOpenChange }: EditBottleDialogP
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<AddBottleDetailsInput, unknown, AddBottleDetailsValues>({
     resolver: zodResolver(addBottleDetailsSchema),
@@ -103,17 +111,24 @@ export function EditBottleDialog({ item, open, onOpenChange }: EditBottleDialogP
 
           <div className="space-y-2">
             <Label htmlFor="edit-condition">Condición</Label>
-            <select
-              id="edit-condition"
-              className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs outline-none"
-              {...register('condition')}
-            >
-              {CONDITION_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+            <Controller
+              control={control}
+              name="condition"
+              render={({ field }) => (
+                <Select value={field.value} onValueChange={field.onChange}>
+                  <SelectTrigger id="edit-condition" className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CONDITION_OPTIONS.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
